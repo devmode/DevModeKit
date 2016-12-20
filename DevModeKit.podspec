@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
 
 s.name         = "DevModeKit"
-s.version      = "0.0.1"
+s.version      = "0.0.2"
 s.summary      = "Testing local CocoaPods for DevModeKit."
-s.description  = "Includes MDT UIColor Exension"
+s.description  = "Stuff we use"
 s.homepage     = "http://devmode.com"
 s.license      = "MIT"
 s.author       = { "Nick Pappas" => "nick@devmode.com" }
