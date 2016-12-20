@@ -1,80 +1,72 @@
-//
-//  DMKMDTColors.swift
-//  devmodekit
-//
-//  Created by Nick Pappas on 5/12/16.
-//  Copyright © 2016 DevMode. All rights reserved.
-//
-
 import Foundation
 
 public extension UIColor {
     
-    static func rgb(r: Int, _ g: Int, _ b: Int, alpha: Int = 100) -> UIColor {
+    static func rgb(r: Int, g: Int, b: Int, alpha: Int = 100) -> UIColor {
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(alpha) / 100.0)
     }
     
     static func gray(comp: Int, alpha: Int = 100) -> UIColor {
-        return rgb(comp, comp, comp, alpha: alpha)
+        return rgb(r: comp, g: comp, b: comp, alpha: alpha)
     }
     
     static var mdtNavy : UIColor {
-        return rgb(0, 30, 70)
+        return rgb(r: 0, g: 30, b: 70)
     }
     
     static var mdtCobolt : UIColor {
-        return rgb(0, 133, 202)
+        return rgb(r: 0, g: 133, b: 202)
     }
     
     static var mdtSkyBlue : UIColor {
-        return rgb(113, 197, 232)
+        return rgb(r: 113, g: 197, b: 232)
     }
     
     static var mdtBlue : UIColor {
-        return rgb(0, 75, 135)
+        return rgb(r: 0, g: 75, b: 135)
     }
     
     static var mdtMediumBlue : UIColor {
-        return rgb( 0, 169, 224)
+        return rgb( r: 0, g: 169, b: 224)
     }
     
     static var mdtLightBlue : UIColor {
-        return rgb(185, 217, 235)
+        return rgb(r: 185, g: 217, b: 235)
     }
     
     static var mdtBlueGray : UIColor {
-        return rgb(91, 127, 149)
+        return rgb(r: 91, g: 127, b: 149)
     }
     
     static var mdtLightGray : UIColor {
-        return rgb(177, 179, 179)
+        return rgb(r: 177, g: 179, b: 179)
     }
     
     static var mdtDarkGray : UIColor {
-        return rgb(136, 139, 141)
+        return rgb(r: 136, g: 139, b: 141)
     }
     
     static var mdtYellow : UIColor {
-        return rgb(255, 206, 0)
+        return rgb(r: 255, g: 206, b: 0)
     }
     
     static var mdtOrange : UIColor {
-        return rgb(227, 82, 5)
+        return rgb(r: 227, g: 82, b: 5)
     }
     
     static var mdtGreen : UIColor {
-        return rgb(119, 188, 31)
+        return rgb(r: 119, g: 188, b: 31)
     }
     
     static var mdtLightOrange : UIColor {
-        return rgb(247, 168, 0)
+        return rgb(r: 247, g: 168, b: 0)
     }
     
     static var mdtLightPurple : UIColor {
-        return rgb(176, 0, 142)
+        return rgb(r: 176, g: 0, b: 142)
     }
     
     static var mdtTurquoise : UIColor {
-        return rgb(0, 196, 179)
+        return rgb(r: 0, g: 196, b: 179)
     }
 }
