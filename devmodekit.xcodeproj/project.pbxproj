@@ -8,20 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		0137A1991CE4D355002B6564 /* devmodekit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0137A1981CE4D355002B6564 /* devmodekit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0137A1A11CE4D38B002B6564 /* DMMDTColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0137A1A01CE4D38B002B6564 /* DMMDTColors.swift */; };
 		0155D4191E09C3E20090F8A2 /* DMAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155D4181E09C3E20090F8A2 /* DMAsync.swift */; };
-		0155D41B1E09C45F0090F8A2 /* DMExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155D41A1E09C45F0090F8A2 /* DMExtensions.swift */; };
+		0155D41B1E09C45F0090F8A2 /* DMStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155D41A1E09C45F0090F8A2 /* DMStringExtensions.swift */; };
 		0155D41D1E09C4CF0090F8A2 /* DMLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155D41C1E09C4CF0090F8A2 /* DMLogger.swift */; };
+		057E101F1E0AE0A000B410B1 /* DMDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057E101E1E0AE0A000B410B1 /* DMDefaults.swift */; };
+		057E10211E0AE0A600B410B1 /* DMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057E10201E0AE0A600B410B1 /* DMConfig.swift */; };
+		057E10231E0AE1EA00B410B1 /* DMAsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057E10221E0AE1EA00B410B1 /* DMAsyncOperation.swift */; };
+		057E10251E0AE21C00B410B1 /* DMUrlExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057E10241E0AE21C00B410B1 /* DMUrlExtensions.swift */; };
+		057E10271E0AE2BE00B410B1 /* DMImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057E10261E0AE2BE00B410B1 /* DMImageExtensions.swift */; };
+		057E10291E0AE34300B410B1 /* DMDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057E10281E0AE34300B410B1 /* DMDateExtensions.swift */; };
+		057E102B1E0AE51100B410B1 /* DMColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057E102A1E0AE51100B410B1 /* DMColorExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0137A1951CE4D355002B6564 /* DevModeKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DevModeKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0137A1981CE4D355002B6564 /* devmodekit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = devmodekit.h; sourceTree = "<group>"; };
 		0137A19A1CE4D355002B6564 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0137A1A01CE4D38B002B6564 /* DMMDTColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMMDTColors.swift; sourceTree = "<group>"; };
 		0155D4181E09C3E20090F8A2 /* DMAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMAsync.swift; sourceTree = "<group>"; };
-		0155D41A1E09C45F0090F8A2 /* DMExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMExtensions.swift; sourceTree = "<group>"; };
+		0155D41A1E09C45F0090F8A2 /* DMStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMStringExtensions.swift; sourceTree = "<group>"; };
 		0155D41C1E09C4CF0090F8A2 /* DMLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMLogger.swift; sourceTree = "<group>"; };
+		057E101E1E0AE0A000B410B1 /* DMDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMDefaults.swift; sourceTree = "<group>"; };
+		057E10201E0AE0A600B410B1 /* DMConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMConfig.swift; sourceTree = "<group>"; };
+		057E10221E0AE1EA00B410B1 /* DMAsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMAsyncOperation.swift; sourceTree = "<group>"; };
+		057E10241E0AE21C00B410B1 /* DMUrlExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMUrlExtensions.swift; sourceTree = "<group>"; };
+		057E10261E0AE2BE00B410B1 /* DMImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMImageExtensions.swift; sourceTree = "<group>"; };
+		057E10281E0AE34300B410B1 /* DMDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMDateExtensions.swift; sourceTree = "<group>"; };
+		057E102A1E0AE51100B410B1 /* DMColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMColorExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,9 +68,15 @@
 			children = (
 				0137A1981CE4D355002B6564 /* devmodekit.h */,
 				0155D4181E09C3E20090F8A2 /* DMAsync.swift */,
-				0155D41A1E09C45F0090F8A2 /* DMExtensions.swift */,
-				0137A1A01CE4D38B002B6564 /* DMMDTColors.swift */,
+				057E10221E0AE1EA00B410B1 /* DMAsyncOperation.swift */,
+				057E102A1E0AE51100B410B1 /* DMColorExtensions.swift */,
+				057E10201E0AE0A600B410B1 /* DMConfig.swift */,
+				057E10281E0AE34300B410B1 /* DMDateExtensions.swift */,
+				057E101E1E0AE0A000B410B1 /* DMDefaults.swift */,
+				057E10261E0AE2BE00B410B1 /* DMImageExtensions.swift */,
 				0155D41C1E09C4CF0090F8A2 /* DMLogger.swift */,
+				0155D41A1E09C45F0090F8A2 /* DMStringExtensions.swift */,
+				057E10241E0AE21C00B410B1 /* DMUrlExtensions.swift */,
 				0137A19A1CE4D355002B6564 /* Info.plist */,
 			);
 			path = devmodekit;
@@ -143,10 +161,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0155D41B1E09C45F0090F8A2 /* DMExtensions.swift in Sources */,
+				057E101F1E0AE0A000B410B1 /* DMDefaults.swift in Sources */,
+				057E10231E0AE1EA00B410B1 /* DMAsyncOperation.swift in Sources */,
+				057E10211E0AE0A600B410B1 /* DMConfig.swift in Sources */,
+				057E10251E0AE21C00B410B1 /* DMUrlExtensions.swift in Sources */,
+				0155D41B1E09C45F0090F8A2 /* DMStringExtensions.swift in Sources */,
+				057E10291E0AE34300B410B1 /* DMDateExtensions.swift in Sources */,
+				057E102B1E0AE51100B410B1 /* DMColorExtensions.swift in Sources */,
 				0155D41D1E09C4CF0090F8A2 /* DMLogger.swift in Sources */,
+				057E10271E0AE2BE00B410B1 /* DMImageExtensions.swift in Sources */,
 				0155D4191E09C3E20090F8A2 /* DMAsync.swift in Sources */,
-				0137A1A11CE4D38B002B6564 /* DMMDTColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
