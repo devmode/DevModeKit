@@ -1,6 +1,6 @@
 import Foundation
 
-public class DMLogger {
+public class Logger {
   
   public enum Level : Int {
     case Debug = 0, Info = 1, Warning = 2, Error = 4
@@ -69,42 +69,42 @@ public class DMLogger {
   }
   
   public func log(level: Level, message: String) {
-    DMLogger.log(category: category, level: level, message: message)
+    Logger.log(category: category, level: level, message: message)
   }
   
   public func log(level: Level, messageCreator: MessageCreator) {
-    DMLogger.log(category: category, level: level, messageCreator: messageCreator)
+    Logger.log(category: category, level: level, messageCreator: messageCreator)
   }
   
   public func debug(message: String) {
-    DMLogger.debug(category: category, message: message)
+    Logger.debug(category: category, message: message)
   }
   
   public func debug(messageCreator: MessageCreator) {
-    DMLogger.debug(category: category, messageCreator: messageCreator)
+    Logger.debug(category: category, messageCreator: messageCreator)
   }
   
   public func info(message: String) {
-    DMLogger.info(category: category, message: message)
+    Logger.info(category: category, message: message)
   }
   
   public func info(messageCreator: MessageCreator) {
-    DMLogger.info(category: category, messageCreator: messageCreator)
+    Logger.info(category: category, messageCreator: messageCreator)
   }
   
   public func warning(message: String) {
-    DMLogger.warning(category: category, message: message)
+    Logger.warning(category: category, message: message)
   }
   
   public func warning(messageCreator: MessageCreator) {
-    DMLogger.warning(category: category, messageCreator: messageCreator)
+    Logger.warning(category: category, messageCreator: messageCreator)
   }
   
   public func error(message: String) {
-    DMLogger.error(category: category, message: message)
+    Logger.error(category: category, message: message)
   }
   
   public func error(messageCreator: MessageCreator) {
-    DMLogger.error(category: category, messageCreator: messageCreator)
+    Logger.error(category: category, messageCreator: messageCreator)
   }
 }

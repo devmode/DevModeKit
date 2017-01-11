@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public typealias ImageCancelHandle = ()->()
+public typealias ImageCancelHandle = () -> ()
 
 class ImageLoader {
   
@@ -41,7 +41,7 @@ class ImageLoader {
     let cachePath = (self.imageCacheDir as NSString).appendingPathComponent(key)
     
     loadingQueue.addOperation(
-      DMAsyncOperation { done in
+      AsynchronousOperation { done in
         guard !cancelled else { return done() }
         if fileManager.fileExists(atPath: cachePath) {
           

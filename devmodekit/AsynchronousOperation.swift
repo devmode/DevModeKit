@@ -1,16 +1,16 @@
 import Foundation
 
-/// Used for image load caching.
-open class DMAsyncOperation: Operation {
+/// Used for asynchronous operations.
+open class AsynchronousOperation: Operation {
   
   let task: (@escaping () -> ()) -> ()
   
-  open override var isAsynchronous : Bool {
+  open override var isAsynchronous: Bool {
     return true
   }
   
   fileprivate var _finished = false
-  open override var isFinished : Bool {
+  open override var isFinished: Bool {
     get {
       return _finished
     }
@@ -22,7 +22,7 @@ open class DMAsyncOperation: Operation {
   }
   
   fileprivate var _executing = false
-  open override var isExecuting : Bool {
+  open override var isExecuting: Bool {
     get {
       return _executing
     }

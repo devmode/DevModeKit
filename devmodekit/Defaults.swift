@@ -1,23 +1,23 @@
 import Foundation
 
 /// Easily get and set user defaults.
-open class DMDefaults {
+open class Defaults {
   
-  open class var standard: DMDefaults {
+  open class var standard: Defaults {
     struct Singleton {
-      static let instance = DMDefaults(defaults: UserDefaults.standard)
+      static let instance = Defaults(defaults: UserDefaults.standard)
     }
     return Singleton.instance
   }
   
-  open class var group: DMDefaults {
+  open class var group: Defaults {
     struct Singleton {
-      static let instance = DMDefaults(defaults: UserDefaults(suiteName: "group.some.group.name")!)
+      static let instance = Defaults(defaults: UserDefaults(suiteName: "group.some.group.name")!)
     }
     return Singleton.instance
   }
   
-  fileprivate let defaults : UserDefaults
+  fileprivate let defaults: UserDefaults
   
   public init(defaults: UserDefaults) {
     self.defaults = defaults

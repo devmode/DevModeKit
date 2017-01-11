@@ -1,10 +1,7 @@
-/// Components for a day (day, month, year)
+import Foundation
+
 fileprivate let DayComponents: NSCalendar.Unit = [NSCalendar.Unit.year, NSCalendar.Unit.month, NSCalendar.Unit.day]
-
-/// Components for a time (hour, minute)
 fileprivate let TimeComponents: NSCalendar.Unit = [NSCalendar.Unit.hour, NSCalendar.Unit.minute]
-
-/// Components for a day and time.
 fileprivate let TotalComponents = DayComponents.union(TimeComponents)
 
 /// All ISO date formats.
@@ -16,10 +13,7 @@ fileprivate let isoFormats = [
 
 /// Additional date-related functionality.
 public extension Date {
-  
   public static var calendar = Calendar.current
-  
-  /// A shared instance of NSCalendar to be used for all date-related operations.
   public static func sharedCalendar() -> Calendar {
     return calendar
   }
@@ -45,10 +39,16 @@ public extension Date {
     return formatter.string(from: self)
   }
   
-  public func stringWithDateFormat(_ format: String) -> String {
+  public func string(_ format: String) -> String {
     let formatter = DateFormatter()
     formatter.dateFormat = format
-    formatter.timeZone = Date.sharedCalendar().timeZone
+    return formatter.string(from: self)
+  }
+  
+  public func string(with dateStyle: DateFormatter.Style = .short, and timeStyle: DateFormatter.Style = .none) -> String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = dateStyle
+    formatter.timeStyle = timeStyle
     return formatter.string(from: self)
   }
   

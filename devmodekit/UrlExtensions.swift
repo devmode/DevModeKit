@@ -1,3 +1,5 @@
+import Foundation
+
 public extension URL {
   
   func parseQuery() -> [String: String] {

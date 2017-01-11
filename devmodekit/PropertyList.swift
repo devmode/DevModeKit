@@ -1,28 +1,27 @@
 import Foundation
 
-/// Easily pull values from configuration pList files.
-open class DMConfig {
+/// Easily pull values from property list files.
+open class PropertyList {
   
   private let dictionary: NSDictionary
   
-  open static var currentEnvironment: Environment = .Production
-  open static var currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Unknown"
+  open static var environment: Environment = .production
   
-  open static var sharedInstance: DMConfig {
+  open static var main: PropertyList {
     struct Singleton {
-      static let instance = DMConfig(name: "Config-\(DMConfig.currentEnvironment)")
+      static let instance = PropertyList(name: "\(PropertyList.environment)")
     }
     return Singleton.instance
   }
   
   public enum Environment: Int {
-    case Test = 0, Staging = 1, Staging2 = 2, Production = 3
+    case test = 0, staging = 1, staging2 = 2, production = 3
     var name: String {
       switch self {
-        case .Test: return "Test"
-        case .Staging: return "Staging"
-        case .Staging2: return "Staging2"
-        case .Production: return "Production"
+        case .test: return "Test"
+        case .staging: return "Staging"
+        case .staging2: return "Staging2"
+        case .production: return "Production"
       }
     }
   }
