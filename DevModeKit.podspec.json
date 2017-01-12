@@ -6,7 +6,7 @@
   "homepage": "http://devmode.com",
   "license": "MIT",
   "authors": { "Matthew Wakefield": "matt@devmode.com" },
-  "source": { "git": "https://github.com/DevModeInc/DevModeKit.git", "tag": "0.2.0" },
+  "source": { "git": "https://github.com/DevMode/DevModeKit.git", "tag": "0.2.0" },
   "platforms": { "ios": "9.0" },
   "source_files": ["devmodekit/**/*.swift"]
 }
