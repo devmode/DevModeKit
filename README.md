@@ -50,9 +50,11 @@ Logger.log("Test", .warning, "Hello World!")
 Logger.warning("Test", "Hello World!")
 ```
 ### Property Lists
-Ever wish you could interact with values from property files a more easily?  Now you can!  
+Ever wish you could interact with values from property files more easily?  Now you can!  
 ```swift
 // Use subscripts and dot-syntax to retrieve values from property list files.
 PropertyList.currentEnvironment = .Production
+
+// Use subscripts and dot-syntax to retrieve values from property list files.
 PropertyList.main["Group.Key"].string // <value-from-property-list>
 ```
