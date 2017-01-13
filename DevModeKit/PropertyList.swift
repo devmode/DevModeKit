@@ -1,12 +1,14 @@
 import Foundation
 
-/// Easily pull values from property list files.
+/// Easily pull values from property list files based on the app environment using subscripts.
 open class PropertyList {
   
   private let dictionary: NSDictionary
   
+  /// The environment for the application.
   open static var environment: Environment = .production
   
+  /// The main property list for the application, which is determined by the enironment.
   open static var main: PropertyList {
     struct Singleton {
       static let instance = PropertyList(name: "\(PropertyList.environment)")
@@ -14,6 +16,7 @@ open class PropertyList {
     return Singleton.instance
   }
   
+  /// An enumeration of potential app environments - test, staging, staging2, or production.
   public enum Environment: Int {
     case test = 0, staging = 1, staging2 = 2, production = 3
     var name: String {
@@ -24,6 +27,29 @@ open class PropertyList {
         case .production: return "Production"
       }
     }
+  }
+  
+  /// Initializes a property list object based on the file name.
+  /// - parameter name: The file name of the property list.
+  public init(name: String) {
+    let path = Bundle.main.path(forResource: name, ofType: "plist")
+    var dictionary: NSDictionary?
+    if let path = path {
+      dictionary = NSDictionary(contentsOfFile: path)
+    }
+    self.dictionary = dictionary ?? NSDictionary()
+  }
+  
+  private func fetch(key: String) -> AnyObject? {
+    guard let container = containerFor(dictionary: dictionary, path: key.components(separatedBy: ".")) else { return nil }
+    return container.object(forKey: key.components(separatedBy: ".").last!) as AnyObject?
+  }
+  
+  private func containerFor(dictionary: NSDictionary, path: Array<String>) -> NSDictionary? {
+    guard path.count > 0 else { return dictionary }
+    guard let container = dictionary[path[0]] as? NSDictionary else { return nil }
+    guard path[1 ..< path.count].count > 1 else { return container }
+    return containerFor(dictionary: container, path: Array(path[1 ..< path.count]))
   }
   
   struct Entry {
@@ -53,27 +79,6 @@ open class PropertyList {
     init(value: AnyObject?) {
       self.value = value
     }
-  }
-  
-  public init(name: String) {
-    let path = Bundle.main.path(forResource: name, ofType: "plist")
-    var dictionary: NSDictionary?
-    if let path = path {
-      dictionary = NSDictionary(contentsOfFile: path)
-    }
-    self.dictionary = dictionary ?? NSDictionary()
-  }
-  
-  private func fetch(key: String) -> AnyObject? {
-    guard let container = containerFor(dictionary: dictionary, path: key.components(separatedBy: ".")) else { return nil }
-    return container.object(forKey: key.components(separatedBy: ".").last!) as AnyObject?
-  }
-  
-  private func containerFor(dictionary: NSDictionary, path: Array<String>) -> NSDictionary? {
-    guard path.count > 0 else { return dictionary }
-    guard let container = dictionary[path[0]] as? NSDictionary else { return nil }
-    guard path[1 ..< path.count].count > 1 else { return container }
-    return containerFor(dictionary: container, path: Array(path[1 ..< path.count]))
   }
   
   subscript(key: String) -> Entry {

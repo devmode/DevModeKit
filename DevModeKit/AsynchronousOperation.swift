@@ -1,15 +1,16 @@
 import Foundation
 
-/// Used for asynchronous operations.
+/// A sub-class of "Operation" with additional functionality
+/// specific to asynchronous operations.
 open class AsynchronousOperation: Operation {
   
-  let task: (@escaping () -> ()) -> ()
+  private let task: (@escaping () -> ()) -> ()
   
-  open override var isAsynchronous: Bool {
-    return true
-  }
+  private var _finished = false
+  private var _executing = false
+  private var _cancelled = false
   
-  fileprivate var _finished = false
+  /// Indicates whether the operation is finished.
   open override var isFinished: Bool {
     get {
       return _finished
@@ -21,7 +22,7 @@ open class AsynchronousOperation: Operation {
     }
   }
   
-  fileprivate var _executing = false
+  /// Indicates whether the operation is currently executing or not.
   open override var isExecuting: Bool {
     get {
       return _executing
@@ -33,7 +34,7 @@ open class AsynchronousOperation: Operation {
     }
   }
   
-  fileprivate var _cancelled = false
+  /// Indicates whether the operation has been cancelled or not.
   open override var isCancelled : Bool {
     get {
       return _cancelled
@@ -45,12 +46,20 @@ open class AsynchronousOperation: Operation {
     }
   }
   
+  /// Indicates whether the operation is asynchronous.
+  open override var isAsynchronous: Bool {
+    return true
+  }
+  
+  /// Initializes an asynchronous operation with a specified task.
+  /// - parameter task: A task to be executed asynchronously.
   public init(task: @escaping (@escaping () -> ()) -> ()) {
     self.task = task
   }
   
+  /// Start the asynchronous operation.
   open override func start() {
-    if self.isCancelled {
+    guard !self.isCancelled else {
       self.isFinished = true
       self.isExecuting = false
       return
@@ -63,6 +72,7 @@ open class AsynchronousOperation: Operation {
     }
   }
   
+  /// Cancel the asynchronous operation.
   open override func cancel() {
     super.cancel()
     self.isCancelled = true

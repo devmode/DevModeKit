@@ -3,12 +3,13 @@ import UIKit
 
 public typealias ImageCancelHandle = () -> ()
 
+/// Loads and caches an image from a remote URL.
 class ImageLoader {
   
-  fileprivate let id = "com.devmode.DevModeKit"
-  fileprivate let loadingQueue: OperationQueue
+  private let id = "com.devmode.DevModeKit"
+  private let loadingQueue: OperationQueue
   
-  fileprivate var imageCacheDir: String
+  private var imageCacheDir: String
   
   static let shared = ImageLoader()
   
@@ -43,9 +44,9 @@ class ImageLoader {
     loadingQueue.addOperation(
       AsynchronousOperation { done in
         guard !cancelled else { return done() }
+        
+        // Validate Data:
         if fileManager.fileExists(atPath: cachePath) {
-          
-          // Validate Data:
           guard !cancelled else { return done() }
           guard let data = try? Data(contentsOf: URL(fileURLWithPath: cachePath)),
             let image = UIImage(data: data, scale: UIScreen.main.scale),
@@ -96,15 +97,15 @@ class ImageLoader {
     try? data.write(to: URL(fileURLWithPath: cachePath), options: [.atomic])
   }
   
-  fileprivate func keyForUrl(_ url: URL) -> String {
+  private func keyForUrl(_ url: URL) -> String {
     return url.path.replacingOccurrences(of: "/", with: "_")
   }
   
-  fileprivate func decodedImage(_ image: UIImage) -> UIImage? {
+  private func decodedImage(_ image: UIImage) -> UIImage? {
     return self.decodedImage(image, scale: image.scale)
   }
   
-  fileprivate func decodedImage(_ image: UIImage, scale: CGFloat) -> UIImage? {
+  private func decodedImage(_ image: UIImage, scale: CGFloat) -> UIImage? {
     guard let imgRef = image.cgImage else { return nil }
     let colorSpace = CGColorSpaceCreateDeviceRGB()
     let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
@@ -121,7 +122,12 @@ class ImageLoader {
 }
 
 public extension UIImage {
-  public class func load(_ url: String, token: String?, callback: @escaping (UIImage) -> ()) -> ImageCancelHandle {
+  
+  /// Loads and caches an image from a remote URL.
+  /// - parameter url: A remote URL to an image file.
+  /// - parameter callback: A completion callback containing the image.
+  /// - returns: A cancellation callback.
+  public class func load(_ url: String, token: String? = nil, callback: @escaping (UIImage) -> ()) -> ImageCancelHandle {
     return ImageLoader.shared.load(url, token: token, callback: callback)
   }
 }
