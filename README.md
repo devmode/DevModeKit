@@ -5,18 +5,19 @@ A series of helpful Swift extensions and utilities.
 A series of helpful extensions.
 
 ### Date Extensions
-Lots of additional date-related functionality.
+Lots of additional `Date` functionality.
 
 ### Image Extensions
-Ever wish you could more easily create a UIImage from a URL?  Now you can!
+Ever wish you could more easily create a `UIImage` from a `URL` object?  Now you can!
 ```swift
-_ = UIImage.load(member.fullPhoto, token: token) { image in
+_ = UIImage.load("http://cdn.devmode.com/assets/ben_bio-818b58fc249a9d19ba5a5ce436dd54e1.jpg") { image in
   ...
 }
 ```
-Also, your image will be cached locally after first use.
+Also, your `UIImage` will be cached locally after first use.
+
 ### URL Extensions
-Easily parse a query string into a dictionary of key/value pairs.
+Easily parse a `URL` query string into a `Dictionary` of key/value pairs.
 ```swift
 let url = URL(string: "http://www.devmode.com?param1=value1&param2=value2&param3=value3")
 url?.parsedQuery["param1"] // "value1"
