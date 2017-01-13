@@ -10,7 +10,7 @@ Lots of additional `Date` functionality.
 ### Image Extensions
 Ever wish you could more easily create a `UIImage` from a `URL` object?  Now you can!
 ```swift
-_ = UIImage.load("http://cdn.devmode.com/assets/ben_bio-818b58fc249a9d19ba5a5ce436dd54e1.jpg") { image in
+UIImage.load("http://cdn.devmode.com/assets/ben_bio-818b58fc249a9d19ba5a5ce436dd54e1.jpg") { img in
   ...
 }
 ```
@@ -52,7 +52,7 @@ Logger.warning("Test", "Hello World!")
 ### Property Lists
 Ever wish you could interact with values from property files more easily?  Now you can!  
 ```swift
-// Use subscripts and dot-syntax to retrieve values from property list files.
+// Set a persistent environment to switch between property lists.
 PropertyList.currentEnvironment = .Production
 
 // Use subscripts and dot-syntax to retrieve values from property list files.
