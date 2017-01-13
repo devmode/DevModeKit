@@ -41,7 +41,7 @@ open class Defaults {
     defaults.synchronize()
   }
   
-  subscript(key: String) -> AnyObject? {
+  public subscript(key: String) -> AnyObject? {
     get {
       return defaults.object(forKey: key) as AnyObject?
     }
