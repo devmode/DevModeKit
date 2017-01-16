@@ -3,16 +3,18 @@ import Foundation
 /// Easily pull values from property list files based on the app environment using subscripts.
 open class PropertyList {
   
-  /// A dictionary representation of the property list.
   private let dictionary: NSDictionary
   
   /// The environment for the application.
   open static var environment: Environment = .production
   
+  /// The bundle to use to locate property lists.
+  open static var bundle: Bundle = Bundle.main
+  
   /// The main property list for the application, which is determined by the enironment.
   open static var main: PropertyList {
     struct Singleton {
-      static let instance = PropertyList(name: "\(PropertyList.environment)")
+      static let instance = PropertyList(name: "\(PropertyList.environment.name)")
     }
     return Singleton.instance
   }
@@ -36,7 +38,6 @@ open class PropertyList {
   /// A single line entry in a property list.
   public struct Entry {
     
-    /// The value of the entry.
     private let value: AnyObject?
     
     /// A string representation of the entry.
@@ -71,7 +72,7 @@ open class PropertyList {
   /// Initializes a property list object based on the file name.
   /// - parameter name: The file name of the property list.
   public init(name: String) {
-    let path = Bundle.main.path(forResource: name, ofType: "plist")
+    let path = PropertyList.bundle.path(forResource: name, ofType: "plist")
     var dictionary: NSDictionary?
     if let path = path {
       dictionary = NSDictionary(contentsOfFile: path)

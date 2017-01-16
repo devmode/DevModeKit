@@ -50,11 +50,14 @@ Logger.log("Test", .warning, "Hello World!")
 Logger.warning("Test", "Hello World!")
 ```
 ### Property Lists
-Ever wish you could interact with values from property files more easily?  Now you can!  
+Ever wish you could interact with nested values from property files more easily?  Now you can!  
 ```swift
 // Set a persistent environment to switch between property lists.
-PropertyList.currentEnvironment = .Production
+PropertyList.environment = .production
+
+// Specify the `Bundle` to use to locate the property list.
+PropertyList.bundle = Bundle(for: type(of: self))
 
 // Use subscripts and dot-syntax to retrieve values from property list files.
-PropertyList.main["Group.Key"].string // <value-from-property-list>
+PropertyList.main["Group.SubOne.Key"].string // <nested-value-from-property-list>
 ```
