@@ -241,4 +241,20 @@ public extension Date {
     formatter.dateFormat = format
     return formatter.string(from: self)
   }
+  
+  /// A quick way to convert a String to a date using a known style.
+  /// - parameter dateString: The styled Date as a String.
+  /// - parameter dateStyle: The known style of the date.
+  /// - parameter timeStyle: The known style of the time.
+  /// - returns: The created Date object.
+  public static func create(
+    from dateString: String,
+    with dateStyle: DateFormatter.Style = .short,
+    and timeStyle: DateFormatter.Style = .none) -> Date? {
+    
+    let formatter = DateFormatter()
+    formatter.dateStyle = dateStyle
+    formatter.timeStyle = timeStyle
+    return formatter.date(from: dateString)
+  }
 }
