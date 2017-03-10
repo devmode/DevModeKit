@@ -133,7 +133,7 @@ public extension Date {
   /// - returns: The date with the added minutes.
   public func addMinutes(_ minutes: Int) -> Date {
     var components = (Date.sharedCalendar as NSCalendar).components(TotalComponents, from: self)
-    components.minute = minutes
+    components.minute = components.minute! + minutes
     guard let result = Date.sharedCalendar.date(from: components) else { return Date() }
     return result
   }
