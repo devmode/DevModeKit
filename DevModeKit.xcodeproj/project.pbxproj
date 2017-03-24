@@ -21,6 +21,7 @@
 		052BC2081E298BCD001BC242 /* Production.plist in Resources */ = {isa = PBXBuildFile; fileRef = 052BC2061E298882001BC242 /* Production.plist */; };
 		05488A491E2953B7001D6F11 /* DefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05488A481E2953B7001D6F11 /* DefaultsTests.swift */; };
 		0570C4171E294EFD006899FF /* UrlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0570C4161E294EFD006899FF /* UrlTests.swift */; };
+		05D91F421E85788400DF3C1D /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D91F411E85788400DF3C1D /* DateTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		052BC2061E298882001BC242 /* Production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Production.plist; path = DevModeKitTests/Production.plist; sourceTree = SOURCE_ROOT; };
 		05488A481E2953B7001D6F11 /* DefaultsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsTests.swift; sourceTree = "<group>"; };
 		0570C4161E294EFD006899FF /* UrlTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlTests.swift; sourceTree = "<group>"; };
+		05D91F411E85788400DF3C1D /* DateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 		0570C4191E294FFE006899FF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				05D91F411E85788400DF3C1D /* DateTests.swift */,
 				0570C4161E294EFD006899FF /* UrlTests.swift */,
 			);
 			name = Extensions;
@@ -289,6 +292,7 @@
 				0570C4171E294EFD006899FF /* UrlTests.swift in Sources */,
 				052BC2051E298867001BC242 /* PropertyListTests.swift in Sources */,
 				05488A491E2953B7001D6F11 /* DefaultsTests.swift in Sources */,
+				05D91F421E85788400DF3C1D /* DateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

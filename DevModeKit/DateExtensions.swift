@@ -1,8 +1,8 @@
 import Foundation
 
-fileprivate let DayComponents = [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day]
-fileprivate let HourComponents = DayComponents + [Calendar.Component.hour]
-fileprivate let TimeComponents = [Calendar.Component.hour, Calendar.Component.minute]
+fileprivate let DayComponents: [Calendar.Component] = [.year, .month, .day]
+fileprivate let HourComponents = DayComponents + [.hour]
+fileprivate let TimeComponents: [Calendar.Component] = [.hour, .minute]
 fileprivate let TotalComponents = DayComponents + TimeComponents
 
 fileprivate let isoFormats = [
@@ -32,6 +32,12 @@ public extension Date {
   }
   
   // MARK: Read-Only Computed Properties
+  
+  /// The minute relative to the shared calendar.
+  public var minute: Int {
+    guard let value = Date.sharedCalendar.dateComponents(Set(TimeComponents), from: self).minute else { return 0 }
+    return value
+  }
   
   /// The hour relative to the shared calendar.
   public var hour: Int {
@@ -214,7 +220,7 @@ public extension Date {
   /// - parameter weeks: The number of weeks to add.
   /// - returns: The date with the added weeks.
   public func addWeeks(_ weeks: Int) -> Date {
-    return addDays(weeks*7)
+    return addDays(weeks * 7)
   }
   
   /// Add months to the date.
