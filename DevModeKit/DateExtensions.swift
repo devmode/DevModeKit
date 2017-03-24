@@ -1,8 +1,9 @@
 import Foundation
 
-fileprivate let DayComponents: NSCalendar.Unit = [NSCalendar.Unit.year, NSCalendar.Unit.month, NSCalendar.Unit.day]
-fileprivate let TimeComponents: NSCalendar.Unit = [NSCalendar.Unit.hour, NSCalendar.Unit.minute]
-fileprivate let TotalComponents = DayComponents.union(TimeComponents)
+fileprivate let DayComponents = [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day]
+fileprivate let HourComponents = DayComponents + [Calendar.Component.hour]
+fileprivate let TimeComponents = [Calendar.Component.hour, Calendar.Component.minute]
+fileprivate let TotalComponents = DayComponents + TimeComponents
 
 fileprivate let isoFormats = [
   "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", "yyyy-MM-dd'T'HH:mm:ss.SSSZ", "yyyy-MM-dd'T'HH:mm:ss.SSS",
@@ -13,41 +14,47 @@ fileprivate let isoFormats = [
 /// Additional date-related functionality.
 public extension Date {
   
-  /// The current calendar to use to determine date/time.
+  // MARK: Class Variables
+  
+  /// The calendar to use to determine date/time.
   /// Set the time zone on this calendar and it will persist across other Date functions.
   public static var calendar = Calendar.current
   
-  /// A computed read-only instance of the current calendar.
+  /// A shared instance of the current calendar.
   public static var sharedCalendar: Calendar {
     return calendar
   }
   
   /// Today's date relative to the shared calendar.
   public static var today: Date {
-    let components = (sharedCalendar as NSCalendar).components(DayComponents, from: Date())
-    guard let result = sharedCalendar.date(from: components) else { return Date() }
+    guard let result = sharedCalendar.date(from: sharedCalendar.dateComponents(Set(DayComponents), from: Date())) else { return Date() }
     return result
   }
   
+  // MARK: Read-Only Computed Properties
+  
   /// The hour relative to the shared calendar.
   public var hour: Int {
-    return (Date.sharedCalendar as NSCalendar).components(DayComponents.union(.hour), from: self).hour!
+    guard let value = Date.sharedCalendar.dateComponents(Set(HourComponents), from: self).hour else { return 0 }
+    return value
   }
   
   /// The day relative to the shared calendar.
   public var day: Int {
-    return (Date.sharedCalendar as NSCalendar).components(DayComponents, from: self).day!
+    guard let value = Date.sharedCalendar.dateComponents(Set(DayComponents), from: self).day else { return 0 }
+    return value
   }
   
   /// The cumulative number of minutes into the day.
   public var minutesIntoDay: Int {
-    let components = (Date.sharedCalendar as NSCalendar).components(TotalComponents, from: self)
-    return components.hour! * 60 + components.minute!
+    let components = Date.sharedCalendar.dateComponents(Set(TotalComponents), from: self)
+    guard let hour = components.hour, let minute = components.minute else { return 0 }
+    return hour * 60 + minute
   }
   
   /// The top of the hour relative to the shared calendar.
   public var startOfHour: Date {
-    var components = (Date.sharedCalendar as NSCalendar).components(TotalComponents, from: self)
+    var components = Date.sharedCalendar.dateComponents(Set(TotalComponents), from: self)
     components.minute = 0
     guard let result = Date.sharedCalendar.date(from: components) else { return Date() }
     return result
@@ -55,7 +62,7 @@ public extension Date {
   
   /// The start of the day relative to the shared calendar.
   public var startOfDay: Date {
-    var components = (Date.sharedCalendar as NSCalendar).components(DayComponents.union(NSCalendar.Unit.hour), from: self)
+    var components = Date.sharedCalendar.dateComponents(Set(HourComponents), from: self)
     components.hour = 1
     guard let result = Date.sharedCalendar.date(from: components) else { return Date() }
     return result
@@ -75,7 +82,7 @@ public extension Date {
   
   /// The first day of the month.
   public var startOfMonth: Date {
-    var components = (Date.sharedCalendar as NSCalendar).components(DayComponents, from: self)
+    var components = Date.sharedCalendar.dateComponents(Set(DayComponents), from: self)
     components.day = 1
     guard let result = Date.sharedCalendar.date(from: components) else { return Date() }
     return result
@@ -83,8 +90,9 @@ public extension Date {
   
   /// The last day of the month.
   public var endOfMonth: Date {
-    var components = (Date.sharedCalendar as NSCalendar).components(DayComponents, from: self)
-    components.month = components.month! + 1
+    var components = Date.sharedCalendar.dateComponents(Set(DayComponents), from: self)
+    guard let month = components.month else { return Date() }
+    components.month = month + 1
     components.day = 0
     guard let result = Date.sharedCalendar.date(from: components) else { return Date() }
     return result
@@ -92,16 +100,18 @@ public extension Date {
   
   /// True if the Date is the same day as today.
   public var isToday: Bool {
-    let components = (Date.sharedCalendar as NSCalendar).components(DayComponents, from: self)
+    let components = Date.sharedCalendar.dateComponents(Set(DayComponents), from: self)
     guard let result = Date.sharedCalendar.date(from: components) else { return false }
     return (result == Date.today)
   }
   
   /// True if the Date is on a weekend.
   public var isWeekend: Bool {
-    let weekday = (Date.sharedCalendar as NSCalendar).component(NSCalendar.Unit.weekday, from: self)
+    let weekday = Date.sharedCalendar.component(Calendar.Component.weekday, from: self)
     return weekday == 1 || weekday == 7
   }
+  
+  // MARK: ISO 8601 Conversion
   
   /// An ISO 8601 formatted date String.
   public var iso8601: String {
@@ -132,8 +142,9 @@ public extension Date {
   /// - parameter minute: The number of minutes to add.
   /// - returns: The date with the added minutes.
   public func addMinutes(_ minutes: Int) -> Date {
-    var components = (Date.sharedCalendar as NSCalendar).components(TotalComponents, from: self)
-    components.minute = components.minute! + minutes
+    var components = Date.sharedCalendar.dateComponents(Set(TotalComponents), from: self)
+    guard let minute = components.minute else { return Date() }
+    components.minute = minute + minutes
     guard let result = Date.sharedCalendar.date(from: components) else { return Date() }
     return result
   }
@@ -142,8 +153,9 @@ public extension Date {
   /// - parameter nearestMinutes: The increment of minutes to round up to.
   /// - returns: The rounded up Date.
   public func roundUpMinutes(_ nearestMinutes: Int) -> Date {
-    var components = (Date.sharedCalendar as NSCalendar).components(TotalComponents, from: self)
-    components.minute = ((components.minute! + nearestMinutes) / nearestMinutes) * nearestMinutes
+    var components = Date.sharedCalendar.dateComponents(Set(TotalComponents), from: self)
+    guard let minute = components.minute else { return Date() }
+    components.minute = ((minute + nearestMinutes) / nearestMinutes) * nearestMinutes
     components.second = 0
     guard let result = Date.sharedCalendar.date(from: components) else { return Date() }
     return result
@@ -153,8 +165,9 @@ public extension Date {
   /// - parameter hours: The number of hours to add.
   /// - returns: The date with the added hours.
   public func addHours(_ hours: Int) -> Date {
-    var components = (Date.sharedCalendar as NSCalendar).components(TotalComponents, from: self)
-    components.hour = components.hour! + hours
+    var components = Date.sharedCalendar.dateComponents(Set(TotalComponents), from: self)
+    guard let hour = components.hour else { return Date() }
+    components.hour = hour + hours
     guard let result = Date.sharedCalendar.date(from: components) else { return Date() }
     return result
   }
@@ -175,8 +188,9 @@ public extension Date {
   /// - parameter days: The number of days to add.
   /// - returns: The date with added days.
   public func addDays(_ days: Int) -> Date {
-    var components = (Date.sharedCalendar as NSCalendar).components(DayComponents, from: self)
-    components.day = components.day! + days
+    var components = Date.sharedCalendar.dateComponents(Set(DayComponents), from: self)
+    guard let day = components.day else { return Date() }
+    components.day = day + days
     guard let result = Date.sharedCalendar.date(from: components) else { return Date() }
     return result
   }
@@ -207,8 +221,9 @@ public extension Date {
   /// - parameter months: The number of months to add.
   /// - returns: The date with the months added.
   public func addMonths(_ months: Int) -> Date {
-    var components = (Date.sharedCalendar as NSCalendar).components([.year, .month], from: self)
-    components.month = components.month! + months
+    var components = Date.sharedCalendar.dateComponents(Set([Calendar.Component.year, Calendar.Component.month]), from: self)
+    guard let month = components.month else { return Date() }
+    components.month = month + months
     guard let result = Date.sharedCalendar.date(from: components) else { return Date() }
     return result
   }
@@ -228,6 +243,7 @@ public extension Date {
   /// - returns: The styled Date as a String.
   public func string(with dateStyle: DateFormatter.Style = .short, and timeStyle: DateFormatter.Style = .none) -> String {
     let formatter = DateFormatter()
+    formatter.timeZone = Date.sharedCalendar.timeZone
     formatter.dateStyle = dateStyle
     formatter.timeStyle = timeStyle
     return formatter.string(from: self)
@@ -238,6 +254,7 @@ public extension Date {
   /// - returns: The formatted Date as a String.
   public func string(_ format: String) -> String {
     let formatter = DateFormatter()
+    formatter.timeZone = Date.sharedCalendar.timeZone
     formatter.dateFormat = format
     return formatter.string(from: self)
   }
@@ -253,6 +270,7 @@ public extension Date {
     and timeStyle: DateFormatter.Style = .none) -> Date? {
     
     let formatter = DateFormatter()
+    formatter.timeZone = Date.sharedCalendar.timeZone
     formatter.dateStyle = dateStyle
     formatter.timeStyle = timeStyle
     return formatter.date(from: dateString)
