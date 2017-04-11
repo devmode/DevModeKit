@@ -19,19 +19,13 @@ open class PropertyList {
     return Singleton.instance
   }
   
-  /// An enumeration of potential app environments - test, staging, staging2, or production.
-  public enum Environment: Int {
+  /// An enumeration of potential app environments - test, development, staging, or production.
+  public enum Environment: String {
     
-    case test = 0, staging = 1, staging2 = 2, production = 3
+    case test = "Test", development = "Development", staging = "Staging", production = "Production"
     
-    /// The name of the environment.
     public var name: String {
-      switch self {
-        case .test: return "Test"
-        case .staging: return "Staging"
-        case .staging2: return "Staging2"
-        case .production: return "Production"
-      }
+      return rawValue
     }
   }
   
