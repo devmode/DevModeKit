@@ -42,7 +42,7 @@ class ImageLoader {
     let cachePath = (self.imageCacheDir as NSString).appendingPathComponent(key)
     
     loadingQueue.addOperation(
-      AsynchronousOperation { done in
+      AsynchronousOperation { op, done in
         guard !cancelled else { return done() }
         
         // Validate Data:

@@ -9,7 +9,7 @@ class AsynchronousTests: XCTestCase {
   override func setUp() {
     super.setUp()
     operationDidExecute = false
-    operation = AsynchronousOperation(task: { callback in
+    operation = AsynchronousOperation(task: { op, callback in
       self.operationDidExecute = true
       callback()
     })
