@@ -281,4 +281,15 @@ public extension Date {
     formatter.timeStyle = timeStyle
     return formatter.date(from: dateString)
   }
+  
+  /// A quick way to convert a String to a date using a custom format.
+  /// - parameter dateString: The styled Date as a String.
+  /// - parameter format: The custom format of the Date as a String.
+  /// - returns: The created Date object.
+  public static func create(from dateString: String, with format: String) -> Date? {
+    let formatter = DateFormatter()
+    formatter.timeZone = Date.sharedCalendar.timeZone
+    formatter.dateFormat = format
+    return formatter.date(from: dateString)
+  }
 }
