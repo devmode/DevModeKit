@@ -14,40 +14,82 @@ open class Defaults {
     return Singleton.instance
   }
   
-  /// Singleton for group/suite defaults.
-  open class var group: Defaults {
-    struct Singleton {
-      static let instance = Defaults(defaults: UserDefaults(suiteName: "group.some.group.name")!)
-    }
-    return Singleton.instance
-  }
-  
   init(defaults: UserDefaults) {
     self.defaults = defaults
   }
+
   
-  /// Boolean-typed getter.
-  /// - parameter key: The key for the boolean.
-  /// - returns: The boolean value.
-  public func booleanFor(_ key: String) -> Bool {
-    return defaults.bool(forKey: key)
-  }
-  
-  /// Boolean-typed setter.
-  /// - parameter key: The key for the boolean.
-  /// - parameter value: The boolean value.
-  public func setBoolFor(_ key: String, value: Bool) {
-    defaults.set(value, forKey: key)
-    defaults.synchronize()
-  }
-  
-  public subscript(key: String) -> AnyObject? {
+  public subscript(key: String) -> Any? {
     get {
-      return defaults.object(forKey: key) as AnyObject?
+      return defaults.object(forKey: key)
     }
     set {
       defaults.set(newValue, forKey: key)
       defaults.synchronize()
     }
   }
+  
+  public subscript(key: String) -> String? {
+    get {
+      return defaults.string(forKey: key)
+    }
+    set {
+      defaults.set(newValue, forKey: key)
+      defaults.synchronize()
+    }
+  }
+  
+  public subscript(key: String) -> Int {
+    get {
+      return defaults.integer(forKey: key)
+    }
+    set {
+      defaults.set(newValue, forKey: key)
+      defaults.synchronize()
+    }
+  }
+  
+  public subscript(key: String) -> Bool {
+    get {
+      return defaults.bool(forKey: key)
+    }
+    set {
+      defaults.set(newValue, forKey: key)
+      defaults.synchronize()
+    }
+  }
+  
+  public subscript(key: String) -> Double {
+    get {
+      return defaults.double(forKey: key)
+    }
+    set {
+      defaults.set(newValue, forKey: key)
+      defaults.synchronize()
+    }
+  }
+  
+  public subscript(key: String) -> Data? {
+    get {
+      return defaults.data(forKey: key)
+    }
+    set {
+      defaults.set(newValue, forKey: key)
+      defaults.synchronize()
+    }
+  }
+  
+  public func store<T: NSObjectProtocol & NSCoding>(key: String, object: T) {
+    defaults.set(NSKeyedArchiver.archivedData(withRootObject: object), forKey: key)
+    defaults.synchronize()
+  }
+  
+  public func load<T: NSObjectProtocol & NSCoding>(key: String) -> T? {
+    if let data : Data = self[key] {
+      return NSKeyedUnarchiver.unarchiveObject(with: data) as? T
+    }
+    return nil
+  }
+
+  
 }

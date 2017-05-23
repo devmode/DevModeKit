@@ -33,6 +33,12 @@ public class Logger {
     self.category = category
   }
   
+  
+  // Initialize a logger instance with a category based on a Type.
+  public convenience init(type: Any.Type) {
+    self.init(category: String(describing: type))
+  }
+  
   // MARK: Class Functions
   
   /// Print a log statement.
