@@ -78,6 +78,15 @@ open class Defaults {
       defaults.synchronize()
     }
   }
+  public subscript(key: String) -> Date? {
+    get {
+      return defaults.object(forKey: key) as? Date
+    }
+    set {
+      defaults.set(newValue, forKey: key)
+      defaults.synchronize()
+    }
+  }
   
   public func store<T: NSObjectProtocol & NSCoding>(key: String, object: T) {
     defaults.set(NSKeyedArchiver.archivedData(withRootObject: object), forKey: key)

@@ -58,6 +58,18 @@ class DefaultsTests: XCTestCase {
     XCTAssertNil(Defaults.standard[testKey])
   }
   
+  func testDate() {
+    let testKey = "dateKey"
+    let testValue = Date(timeIntervalSince1970: 1000)
+    Defaults.standard[testKey] = testValue
+    XCTAssertNotNil(Defaults.standard[testKey])
+    XCTAssertEqual(testValue, Defaults.standard[testKey]!)
+    
+    Defaults.standard[testKey] = (nil as Date?)
+    XCTAssertNil(Defaults.standard[testKey])
+  }
+  
+  
   func testStoreLoad() {
     let testKey = "storeKey"
     let testValue = TestObject()
