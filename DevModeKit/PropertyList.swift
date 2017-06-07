@@ -88,7 +88,7 @@ open class PropertyList {
   }
   
   private func containerFor(dictionary: NSDictionary, path: Array<String>) -> NSDictionary? {
-    guard path.count > 0 else { return dictionary }
+    guard path.count > 1 else { return dictionary }
     guard let container = dictionary[path[0]] as? NSDictionary else { return nil }
     guard path[1 ..< path.count].count > 1 else { return container }
     return containerFor(dictionary: container, path: Array(path[1 ..< path.count]))
